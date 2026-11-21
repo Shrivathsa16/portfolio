@@ -1,48 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root,
 [data-theme='dark'] {
-  --bg: #0f0d0d;
-  --text: #f5f0ef;
+  --bg: #0b0a0a;
+  --bg-soft: #141010;
+  --text: #f5efed;
+  --text-dim: rgba(245, 239, 237, 0.65);
   --accent: #ff3b47;
+  --accent-2: #ff2e9a;
   --accent-soft: rgba(255, 59, 71, 0.18);
-  --panel-bg: rgba(20, 16, 16, 0.86);
+  --glass-bg: rgba(20, 14, 14, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme='light'] {
-  --bg: #faf7f5;
-  --text: #161010;
+  --bg: #faf6f3;
+  --bg-soft: #f1e9e5;
+  --text: #1a1212;
+  --text-dim: rgba(26, 18, 18, 0.65);
   --accent: #d7192a;
-  --accent-soft: rgba(215, 25, 42, 0.12);
-  --panel-bg: rgba(255, 253, 252, 0.9);
+  --accent-2: #c81ba0;
+  --accent-soft: rgba(215, 25, 42, 0.14);
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(20, 10, 10, 0.08);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+html {
+  background: var(--bg);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto;
 }
 
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: background 0.5s ease, color 0.5s ease;
+  cursor: none;
+}
+
+@media (hover: none) {
+  body {
+    cursor: auto;
+  }
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+  color: inherit;
 }
 
 button {
@@ -53,6 +71,180 @@ button {
   background: var(--accent-soft);
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 canvas {
   display: block;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+/* Glass surface shared by cards, navbar, panels */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset, 0 0 40px -10px var(--accent-soft);
+}
+
+.glow-border {
+  box-shadow: 0 0 24px 0 var(--accent-soft), 0 0 0 1px var(--glass-border) inset;
+}
+
+/* Bold uppercase section titles ending in a red dot, with underline */
+.section-title {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title .dot {
+  color: var(--accent);
+}
+
+.section-title .underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.35em;
+  height: 3px;
+  width: 2.5em;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+}
+
+.section-title.glitching span {
+  position: relative;
+}
+
+.section-title.glitching span::before,
+.section-title.glitching span::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.section-title.glitching span::before {
+  color: var(--accent);
+  transform: translate(-2px, 1px);
+  mix-blend-mode: screen;
+}
+
+.section-title.glitching span::after {
+  color: #37e6ff;
+  transform: translate(2px, -1px);
+  mix-blend-mode: screen;
+}
+
+/* Hover-triggered glitch (Contact heading) */
+.glitch-hover span {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-hover:hover span::before,
+.glitch-hover:hover span::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0.85;
+}
+
+.glitch-hover:hover span::before {
+  color: var(--accent);
+  mix-blend-mode: screen;
+  animation: glitch-shift-a 0.35s steps(2, jump-none) infinite;
+}
+
+.glitch-hover:hover span::after {
+  color: #37e6ff;
+  mix-blend-mode: screen;
+  animation: glitch-shift-b 0.4s steps(2, jump-none) infinite reverse;
+}
+
+@keyframes glitch-shift-a {
+  0% {
+    transform: translate(-3px, 2px);
+  }
+  50% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(-3px, 2px);
+  }
+}
+
+@keyframes glitch-shift-b {
+  0% {
+    transform: translate(3px, -1px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  100% {
+    transform: translate(3px, -1px);
+  }
+}
+
+/* Custom cursor */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--accent);
+  opacity: 0.6;
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, border-color 0.25s ease;
+}
+
+.cursor-ring.cursor-hover {
+  width: 60px;
+  height: 60px;
+  opacity: 0.9;
+  background: var(--accent-soft);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
