@@ -12,7 +12,18 @@ const socialLinks = [
 
 export default function Contact() {
   const [status, setStatus] = useState('idle');
+  const [emailCopied, setEmailCopied] = useState(false);
   const hasFormspree = Boolean(contact.formspreeEndpoint);
+
+  const handleEmailClick = async () => {
+    try {
+      await navigator.clipboard.writeText(contact.email);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 1500);
+    } catch {
+      // clipboard unavailable — mailto link still goes through
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,10 +120,11 @@ export default function Contact() {
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                onClick={link.label === 'Email' ? handleEmailClick : undefined}
                 data-cursor-hover
                 className="glass inline-block rounded-full px-5 py-2 text-sm font-medium no-underline transition-transform hover:scale-105"
               >
-                {link.label}
+                {link.label === 'Email' && emailCopied ? 'Copied!' : link.label}
               </a>
             </li>
           ))}
