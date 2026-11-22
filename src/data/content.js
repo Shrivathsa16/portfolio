@@ -117,9 +117,9 @@ export const contact = {
   subheading: "Have a project in mind, or just want to talk tech? My inbox is open.",
   // Create a form at https://formspree.io and drop the endpoint below.
   formspreeEndpoint: '',
-  email: 'you@example.com',
-  whatsapp: 'https://wa.me/910000000000',
+  email: 'shrivathsashettigar16@gmail.com',
   links: {
+    instagram: 'https://www.instagram.com/shrivathsa_16?knvt=ZDZxMmJ0c2c2eGVt',
     github: 'https://github.com/Shrivathsa16',
     linkedin: 'https://www.linkedin.com/in/shrivathsa-shettigar-6b59b232a/',
   },

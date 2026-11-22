@@ -4,7 +4,7 @@ import Reveal from '../components/Reveal.jsx';
 import { contact } from '../data/content.js';
 
 const socialLinks = [
-  { label: 'WhatsApp', href: contact.whatsapp },
+  { label: 'Instagram', href: contact.links.instagram },
   { label: 'Email', href: `mailto:${contact.email}` },
   { label: 'LinkedIn', href: contact.links.linkedin },
   { label: 'GitHub', href: contact.links.github },
