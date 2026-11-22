@@ -115,8 +115,7 @@ export const skills = [
 export const contact = {
   heading: 'CONTACT.',
   subheading: "Have a project in mind, or just want to talk tech? My inbox is open.",
-  // Create a form at https://formspree.io and drop the endpoint below.
-  formspreeEndpoint: '',
+  formspreeEndpoint: 'https://formspree.io/f/xeagraka',
   email: 'shrivathsashettigar16@gmail.com',
   links: {
     instagram: 'https://www.instagram.com/shrivathsa_16?knvt=ZDZxMmJ0c2c2eGVt',
