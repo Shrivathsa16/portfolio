@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { hero, profile } from '../data/content.js';
-import PhotoBreak from '../components/PhotoBreak.jsx';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
 
 const photoSrc = `${import.meta.env.BASE_URL}${profile.photo}`;
@@ -74,7 +73,14 @@ export default function Hero() {
             aria-hidden="true"
           />
           <div className="relative h-full w-full">
-            <PhotoBreak src={photoSrc} />
+            <img
+              src={photoSrc}
+              alt={profile.name}
+              className="mx-auto h-full max-h-[480px] object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
           </div>
         </div>
       </div>
