@@ -3,7 +3,6 @@ import { hero, profile } from '../../data/content.js';
 import { useReducedMotion } from '../../hooks/useReducedMotion.js';
 import { DESKTOP_BREAKPOINT, DESKTOP_SHAPES, MOBILE_SHAPES } from './shardShapes.js';
 import Shard from './Shard.jsx';
-import PhotoPicker from './PhotoPicker.jsx';
 
 // One entry per shard: which direction it flies in from on load, and how
 // far it drifts under pointer parallax (depth in px, rotation in deg).
@@ -41,11 +40,9 @@ export default function HeroCard() {
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== 'undefined' ? window.innerWidth >= DESKTOP_BREAKPOINT : true
   );
-  const [customPhoto, setCustomPhoto] = useState(null);
-
   // Photo + name are read straight from content.js — edit profile.photo /
   // profile.name there, not in this file, to change what the hero shows.
-  const photoSrc = customPhoto || `${import.meta.env.BASE_URL}${profile.photo}`;
+  const photoSrc = `${import.meta.env.BASE_URL}${profile.photo}`;
   const shapes = isDesktop ? DESKTOP_SHAPES : MOBILE_SHAPES;
 
   // Re-apply shard shapes whenever the 860px breakpoint flips.
@@ -225,8 +222,6 @@ export default function HeroCard() {
           </div>
         </div>
       </div>
-
-      <PhotoPicker onSelect={setCustomPhoto} />
     </div>
   );
 }

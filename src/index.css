@@ -306,8 +306,3 @@ canvas {
     animation: none;
   }
 }
-
-.photo-picker-label:focus-within {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
