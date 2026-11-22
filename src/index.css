@@ -248,3 +248,66 @@ canvas {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* === Hero broken-glass shards === */
+.shard-moss {
+  background: radial-gradient(120% 140% at 15% 100%, rgba(255, 45, 63, 0.25), transparent 55%),
+    linear-gradient(160deg, #262f29 0%, #141a16 55%, #0b0f0c 100%);
+}
+
+.shard-teal {
+  background: linear-gradient(155deg, #123238 0%, #0a1f22 55%, #070f11 100%);
+}
+
+.shard-ember {
+  background: radial-gradient(130% 130% at 50% 20%, #5a0b12 0%, #2a0507 55%, #150203 100%);
+}
+
+.shard-highlight {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0) 70%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  mix-blend-mode: screen;
+}
+
+.shard-smoke {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(45% 35% at 30% 40%, rgba(255, 45, 63, 0.55), transparent 60%),
+    radial-gradient(40% 45% at 70% 65%, rgba(255, 90, 100, 0.4), transparent 65%),
+    radial-gradient(55% 40% at 55% 20%, rgba(180, 10, 20, 0.45), transparent 60%);
+  filter: blur(18px);
+  animation: shard-smoke-swirl 14s ease-in-out infinite;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+
+@keyframes shard-smoke-swirl {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(-4%, 3%) rotate(8deg) scale(1.08);
+  }
+  66% {
+    transform: translate(3%, -4%) rotate(-6deg) scale(1.04);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shard-smoke {
+    animation: none;
+  }
+}
+
+.photo-picker-label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
